@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout}" lang="en">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" />
+
+<head>
+	<meta charset="UTF-8">
+	<title>Update Order</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="modal-form">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">
+						<span>Update Order</span>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col">
+							<form action="/order/update" method="post" th:object="${order}">
+								<input type="hidden" th:field="*{id}" />
+								<div class="form-group">
+									<label for="orderCode" class="fw-bold">Code Order:</label>
+									<input type="text" class="form-control" id="orderCode" name="orderCode"
+										th:value="${order.orderCode}" required>
+								</div>
+
+								<div class="form-group">
+									<label for="dateCreated" class="fw-bold">Date Created:</label> <input type="date"
+										class="form-control" id="dateCreate" name="dateCreated"
+										th:value="${order.dateCreated}" required>
+								</div>
+								<div class="form-group">
+									<label for="customer" class="fw-bold">Customer</label>
+									<select class="form-control fw-bold select-2" id="customer"
+										name="customer.customerId" th:field="*{customer.customerId}" >
+										<option value="" >-- Select Customer --</option>
+										<option th:each="customer : ${customerList}" th:value="${customer.customerId}"
+											th:text="${customer.customerName}" ></option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="employee" class="fw-bold">Employee</label>
+									<select class="form-control fw-bold select-2" id="employee"
+										name="employee.employeeId" th:field="*{employee.employeeId}" >
+										<option value="" >-- Select Employee --</option>
+										<option th:each="employee : ${employeeList}" th:value="${employee.employeeId}"
+											th:text="${employee.employeeName}" ></option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="paymentMethod" class="fw-bold">Payment Method</label>
+									<select class="form-control" id="paymentMethod" name="paymentMethod"
+										th:field="*{paymentMethod}">
+										<option value="Chuyển khoản">Chuyển khoản</option>
+										<option value="Tiền mặt">Tiền mặt</option>
+										<option value="Trả góp">Trả góp</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="orderStatus" class="fw-bold">Order Status</label>
+									<select class="form-control" id="orderStatus" name="orderStatus"
+										th:field="*{orderStatus}">
+										<option value="Đơn hàng mới">Đơn hàng mới</option>
+										<option value="Đã giao">Đã giao</option>
+										<option value="Đang giao">Đang giao</option>
+										<option value="Đã hủy">Đã hủy</option>
+									</select>
+								</div>
+
+								<div class="submit-group">
+									<button type="submit" class="btn btn-success fw-bold">Save
+									</button>
+									<a class="btn btn-secondary fw-bold" href="/order/list">Cancel</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

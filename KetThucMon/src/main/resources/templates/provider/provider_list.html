@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List Provider</title>
+</head>
+<body>
+<div layout:fragment="content" class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+              <h2 class="ml-lg-2">Provider Management</h2>
+            </div>
+            <div sec:authorize="hasRole('ADMIN')" class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
+              <a th:href="@{/provider/detail}" class="btn btn-success fw-bold">Add</a>
+            </div>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>Provider Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th sec:authorize="hasRole('ADMIN')">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <th:block th:each="provider, state: ${providerList}">
+            <tr>
+              <td th:text="${state.count}">
+              <td th:text="${provider.providerName}"></td>
+              <td th:text="${provider.address}"></td>
+              <td th:text="${provider.email}"></td>
+              <td th:text="${provider.phone}"></td>
+
+              <th sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/provider/detail/{id}(id=${provider.providerId})}">
+                  <i class="material-icons edit">edit_square</i>
+                </a>
+                <a th:href="@{/provider/delete/{id}(id=${provider.providerId})}">
+                  <i class="material-icons delete">delete</i>
+                </a>
+              </th>
+            </tr>
+          </th:block>
+          </tbody>
+        </table>
+        <div class="clearfix">
+          <ul class="pagination">
+            <li class="page-item disabled"><a href="#">Previous</a></li>
+            <li class="page-item active"><a href="#" class="page-link">1</a></li>
+            <li class="page-item "><a href="#" class="page-link">2</a></li>
+            <li class="page-item "><a href="#" class="page-link">3</a></li>
+            <li class="page-item "><a href="#" class="page-link">4</a></li>
+            <li class="page-item "><a href="#" class="page-link">5</a></li>
+            <li class="page-item "><a href="#" class="page-link">Next</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

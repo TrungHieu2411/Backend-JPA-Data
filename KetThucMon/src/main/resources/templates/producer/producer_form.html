@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${producer.producerId == null} ? 'Add Producer' : 'Update Producer'"></title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <span th:text="${producer.producerId == null} ? 'Add Producer' : 'Update Producer'"></span>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/producer/detail}" method="post" th:object="${producer}">
+          <div class="form-group">
+            <input type="hidden" th:field="*{producerId}">
+            <label for="producerName" class="fw-bold">Full Name</label>
+            <input type="text"
+                   class="form-control" id="producerName"
+                   name="producerName"
+                   placeholder="Producer name"
+                   th:field="*{producerName}"
+            />
+          </div>
+          <div class="submit-group">
+            <button th:if="${producer.producerId == null}" type="submit" name="create"
+                    class="btn btn-success fw-bold">Create
+            </button>
+            <button th:if="${producer.producerId != null}" type="submit" name="update"
+                    class="btn btn-danger fw-bold">Update
+            </button>
+            <a class="btn btn-secondary fw-bold" href="/producer/list">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

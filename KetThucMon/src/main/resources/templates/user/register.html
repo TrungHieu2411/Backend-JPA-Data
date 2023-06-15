@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="main">
+    <div class="container a-container" id="a-container">
+        <form class="form" id="a-form" method="post" th:action="@{/register/save}" th:object="${user}">
+            <h2 class="form_title title">Create Account</h2>
+            <input class="form__input" name="name" th:field="*{name}" type="text" placeholder="Name">
+            <input class="form__input" name="email" th:field="*{email}" type="text" placeholder="Email">
+            <input class="form__input" name="password" th:field="*{password}" type="password" placeholder="Password">
+            <button type="submit" class="switch__button button switch-btn">SIGN UP</button>
+            <div th:if="${param.success}">
+                <p class="description description-success">You've successfully registered to our app!</p>
+            </div>
+        </form>
+    </div>
+    <div class="switch" id="switch-cnt">
+        <div class="switch__circle"></div>
+        <div class="switch__circle switch__circle--t"></div>
+        <div class="switch__container" id="switch-c1">
+            <h2 class="switch__title title">Welcome Back !</h2>
+            <p class="switch__description description">To keep connected with us please login with your personal
+                info</p>
+            <button class="switch__button button switch-btn"><a th:href="@{/login}">SIGN IN</a></button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

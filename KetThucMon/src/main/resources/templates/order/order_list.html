@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>List Order</title>
+</head>
+
+<body>
+	<div layout:fragment="content" class="main-content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="table-wrapper">
+					<div class="table-title">
+						<div class="row">
+							<div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+								<h2 class="ml-lg-2">Order Management</h2>
+							</div>
+							<div sec:authorize="hasRole('ADMIN')"
+								class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
+								<a th:href="@{/order/add}" class="btn btn-success fw-bold">Add</a>
+							</div>
+							<!-- ------------tim kiem thuoc tinh dua theo model
+							 -->
+							<!-- ------------ -->
+						</div>
+					</div>
+
+					<form th:action="@{/order/list}" method="post">
+						<div class="mt-3 mb-4 row">
+							<div class="col">
+								<label for="paymentMethod">Payment Method:</label>
+								<select id="paymentMethod" class="form-control fw-bold select-2"
+									onchange="this.form.submit()" name="paymentMethod">
+									<option value="">All Payment Methods</option>
+									<option value="Tiền mặt" ${paymentMethod=='Tiền mặt' ? 'selected' : '' }>Tiền mặt
+									</option>
+									<option value="Chuyển khoản" ${paymentMethod=='Chuyển khoản' ? 'selected' : '' }>
+										Chuyển
+										khoản</option>
+									<option value="Trả góp" ${paymentMethod=='Trả góp' ? 'selected' : '' }>Trả góp
+									</option>
+									<!-- Thêm các option khác tương ứng với các phương thức thanh toán khác -->
+								</select>
+							</div>
+							<div class="col">
+								<label for="orderStatus">Order Status:</label>
+								<select id="orderStatus" class="form-control fw-bold select-2"
+									onchange="this.form.submit()" name="orderStatus">
+									<option value="">All Order Status</option>
+									<option value="Đơn hàng mới" ${orderStatus=='Đơn hàng mới' ? 'selected' : '' }>Đơn
+										hàng mới
+									</option>
+									<option value="Đang giao" ${orderStatus=='Đang giao' ? 'selected' : '' }>Đang giao
+									</option>
+									<option value="Đã giao" ${orderStatus=='Đã giao' ? 'selected' : '' }>Đã giao
+									</option>
+									<option value="Đã hủy" ${orderStatus=='Đã hủy' ? 'selected' : '' }>Đã hủy</option>
+									<!-- Thêm các option khác tương ứng với các phương thức thanh toán khác -->
+								</select>
+							</div>
+							<hr>
+							<div class="col">
+								<label for="customerId" class="fw-bold">Customer</label>
+								<select class="form-control fw-bold select-2" id="customerId" name="customerId">
+									<option value="">All Customer</option>
+									<option th:each="customer : ${customerList}" th:value="${customer.customerId}"
+										th:text="${customer.customerName}"
+										th:selected="${customerId == customer.customerId}">
+									</option>
+								</select>
+							</div>
+							<div class="col">
+								<label for="employeeId" class="fw-bold">Employee</label>
+								<select class="form-control fw-bold select-2" id="employeeId" name="employeeId">
+									<option value="">All Employee</option>
+									<option th:each="employee : ${employeeList}" th:value="${employee.employeeId}"
+										th:text="${employee.employeeName}"
+										th:selected="${employeeId == employee.employeeId}">
+									</option>
+								</select>
+							</div>
+						</div>
+					</form>
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>No.</th>
+								<th>Order Code</th>
+								<th>Customer</th>
+								<th>Date Created</th>
+								<th>Payment Method</th>
+								<th>Status</th>
+								<th>Employee</th>
+								<th sec:authorize="hasRole('ADMIN')">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="order, state: ${orderList}">
+								<tr>
+									<td th:text="${state.count}">
+									<td th:text="${order.orderCode}"></td>
+									<td th:text="${order.customer.customerName}"></td>
+									<td th:text="${order.dateCreated}"></td>
+									<td th:text="${order.paymentMethod}"></td>
+									<td th:text="${order.orderStatus}"></td>
+									<td th:text="${order.employee.employeeName}"></td>
+
+									<th sec:authorize="hasRole('ADMIN')">
+										<a th:href="@{/order/edit/{id}(id=${order.id})}">
+											<i class="material-icons edit">edit_square</i>
+										</a>
+										<a th:href="@{'/order/detail/'+ ${order.id}}">
+											<i class="material-icons detail">remove_red_eye</i>
+										</a>
+										<a th:href="@{'/order/delete/'+ ${order.id}}">
+											<i class="material-icons delete">delete</i>
+										</a>
+									</th>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
+					<div class="clearfix">
+						<ul class="pagination">
+							<li class="page-item disabled"><a href="#">Previous</a></li>
+							<li class="page-item active"><a href="#" class="page-link">1</a></li>
+							<li class="page-item "><a href="#" class="page-link">2</a></li>
+							<li class="page-item "><a href="#" class="page-link">3</a></li>
+							<li class="page-item "><a href="#" class="page-link">4</a></li>
+							<li class="page-item "><a href="#" class="page-link">5</a></li>
+							<li class="page-item "><a href="#" class="page-link">Next</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

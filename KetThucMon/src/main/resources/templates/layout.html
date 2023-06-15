@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <title>hehe</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/custom.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <style>
+        .select2-container--default .select2-selection--single,
+        .select2-selection.select2-selection--multiple {
+            padding-top: 6.5px;
+            width: 100%;
+            height: 40px;
+            border-color: #dddddd;
+            border-radius: 3px;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            margin-top: -3px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 40px;
+            right: 14px;
+            font-weight: bold;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow b {
+            border-width: 7px;
+        }
+
+        .select2-container :focus {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="body-overlay"></div>
+    <!-- Sidebar  -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <h3>
+                <img src="https://i.pinimg.com/564x/19/20/43/1920433c8389e3bb49d191e9d1896cf4.jpg"
+                     class="img-fluid"/><span>ADMIN</span>
+            </h3>
+        </div>
+        <ul class="list-unstyled component m-0 click-link">
+            <li class="">
+                <a th:href="@{/statis/page}" class="">
+                    <i class="material-icons">bar_chart</i>Dashboard
+                </a>
+            </li>
+            <li class="" sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/user/list}" class="">
+                    <i class="material-icons">admin_panel_settings</i>User (Admin only)
+                </a>
+            </li>
+            <li class="">
+                <a th:href="@{/provider/list}" class="">
+                    <i class="material-icons">token</i>Provider
+                </a>
+            </li>
+            <li class="">
+                <a th:href="@{/producer/list}" class="">
+                    <i class="material-icons">category</i>Producer
+                </a>
+            </li>
+            <li class="">
+                <a th:href="@{/product/list}" class="">
+                    <i class="material-icons">store</i>Product
+                </a>
+            </li>
+            <li class="">
+                <a th:href="@{/employee/list}" class="">
+                    <i class="material-icons">groups</i>Employee
+                </a>
+            </li>
+            <li class="">
+                <a th:href="@{/customer/list}" class="">
+                    <i class="material-icons">sentiment_very_satisfied</i>Customer
+                </a>
+            </li>
+            <li class="">
+                <a th:href="@{/order/list}" class="">
+                    <i class="material-icons">shopping_cart</i>Order
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Page Content -->
+<div id="content">
+    <!-- Top Navbar -->
+    <div class="top-navbar">
+        <div class="xd-topbar">
+            <div class="row">
+                <div class="col-2 col-md-1 col-lg-1 order-2 order-md-1 align-self-center">
+                    <div class="xp-menubar">
+                        <span class="material-icons text-white">signal_cellular_alt</span>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-lg-7 order-3 order-md-2">
+                    <div class="xp-searchbar">
+                        <form>
+                            <div class="input-group">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-10 col-md-6 col-lg-4 order-1 order-md-3">
+                    <div class="xp-profilebar text-right">
+                        <nav class="navbar p-0">
+                            <ul class="nav navbar-nav flex-row ml-auto">
+                                <li class="dropdown nav-item active">
+                                    <a class="nav-link" href="#" data-toggle="dropdown">
+                                        <span class="material-icons">notifications</span>
+                                        <span class="notification">4</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">You have 4 new notification</a></li>
+                                        <li><a href="#">You have 3 new notification</a></li>
+                                        <li><a href="#">You have 2 new notification</a></li>
+                                        <li><a href="#">You have 1 new notification</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span class="material-icons">question_answer</span>
+                                    </a>
+                                </li>
+
+                                <li class="dropdown nav-item">
+                                    <a class="nav-link" href="#" data-toggle="dropdown">
+                                        <img src="https://i.pinimg.com/564x/19/20/43/1920433c8389e3bb49d191e9d1896cf4.jpg"
+                                             style="width: 40px; border-radius: 50%"/>
+                                        <span class="xp-user-live"></span>
+                                    </a>
+                                    <ul class="dropdown-menu small-menu">
+                                        <li>
+                                            <a th:href="@{/user/detail/1}">
+                                                <span class="material-icons">person_outline</span>
+                                                Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <span class="material-icons">settings</span>
+                                                Settings
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a th:href="@{/logout}">
+                                                <span class="material-icons">logout</span>Log Out
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" layout:fragment="content">
+
+    </div>
+</div>
+
+<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.select-2').select2({});
+        $('#producerId').change(function () {
+            $(this).closest('form').submit();
+        });
+        $('#providerId').change(function () {
+            $(this).closest('form').submit();
+        });
+        $('#customerId').change(function () {
+            $(this).closest('form').submit();
+        });
+        $('#employeeId').change(function () {
+            $(this).closest('form').submit();
+        });
+
+        $('#dateCreated').val(new Date().toJSON().slice(0, 10));
+
+        $(".xp-menubar").on("click", function () {
+            $("#sidebar").toggleClass("active");
+            $("#content").toggleClass("active");
+        });
+
+        $(".xp-menubar,.body-overlay").on("click", function () {
+            $("#sidebar,.body-overlay").toggleClass("show-nav");
+        });
+
+        $("#orderForm").submit(function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Perform Ajax request
+            $.ajax({
+                url: $(this).attr("action"),
+                type: $(this).attr("method"),
+                data: $(this).serialize(), // Serialize form data
+                success: function (response) {
+                    // Hide the order form
+                    $(".add-order-form").hide();
+
+                    // Show the success message and order code
+                    $("#orderCode").text(response.orderCode);
+                    $(".order-success-message").show();
+
+                    // Reload the page after a delay
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000); // 3000 milliseconds = 3 seconds (adjust the delay as needed)
+                },
+                error: function () {
+                    alert("Failed to create order.");
+                }
+            });
+        });
+
+        //Random giá trị của Code Order// Generate a random code
+        function generateRandomCode(length) {
+            let result = '';
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            const charactersLength = characters.length;
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+        // Set a random code for the "Code Order" input field
+        document.addEventListener("DOMContentLoaded", function () {
+            const codeOrderInput = document.getElementById("orderCode");
+            if (codeOrderInput) {
+                codeOrderInput.value = generateRandomCode(5);
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

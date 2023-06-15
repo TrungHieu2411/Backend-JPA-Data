@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout}" lang="en">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" />
+
+<head>
+	<meta charset="UTF-8">
+	<title>Add Order</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="modal-form">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">
+						<span>Add Order</span>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="text-center fw-bold py-1">Customer
+										information</h4>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-4 fw-bold">Full Name:</div>
+										<div class="col-md-8 text-start" th:text="${order.customer.customerName}">
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-4 fw-bold">Email:</div>
+										<div class="col-md-8 text-start" th:text="${order.customer.email}"></div>
+									</div>
+									<div class="row">
+										<div class="col-md-4 fw-bold">Phone:</div>
+										<div class="col-md-8 text-start" th:text="${order.customer.phone}"></div>
+									</div>
+									<div class="row">
+										<div class="col-md-4 fw-bold">Address:</div>
+										<div class="col-md-8 text-start" th:text="${order.customer.address}">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4 fw-bold">Type Customer:</div>
+										<div class="col-md-8 text-start" th:text="${order.customer.customerType}">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="text-center fw-bold py-1">Employee
+										information</h4>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-3 fw-bold">Full Name:</div>
+										<div class="col-md-9 text-start" th:text="${order.employee.employeeName}">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-3 fw-bold">Email:</div>
+										<div class="col-md-9 text-start" th:text="${order.employee.email}"></div>
+									</div>
+									<div class="row">
+										<div class="col-md-3 fw-bold">Phone:</div>
+										<div class="col-md-9 text-start" th:text="${order.employee.phone}"></div>
+									</div>
+									<div class="row">
+										<div class="col-md-3 fw-bold">Address:</div>
+										<div class="col-md-9 text-start" th:text="${order.employee.address}">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 my-4">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="text-center fw-bold py-1">Order Details</h4>
+								</div>
+								<div class="card-body ">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>No.</th>
+												<th>Code Order</th>
+												<th>Product Name</th>
+												<th>Image</th>
+												<th>Quantity</th>
+												<th>Selling Price</th>
+												<th>Unit Price</th>
+												<th>Total</th>
+												<th>Description</th>
+												<th>Name of Provider</th>
+												<th>Name of Producer</th>
+												<th>Order Status</th>
+												<!-- Thêm cột cho chức năng xóa -->
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="detail, state: ${order.orderDetails}">
+												<td th:text="${state.count}"></td>
+												<td th:text="${detail.order.orderCode}"></td>
+												<td th:text="${detail.product.productName}"></td>
+												<td><img th:src="@{'/images/product/' + ${detail.product.image}}" alt="Product Image"
+												style="width: 50px; height: 50px;"></td>
+												<td th:text="${detail.quantity}"></td>
+												<td th:text="${detail.sellingPrice}"></td>
+												<td th:text="${detail.product.productPrice}"></td>
+												<td th:text="${detail.totalPrice}"></td>
+												<td th:text="${detail.product.description}"></td>
+												<td th:text="${detail.product.provider.providerName}"></td>
+												<td th:text="${detail.product.producer.producerName}"></td>
+												<td th:text="${detail.order.orderStatus}"></td>
+											</tr>
+										</tbody>
+									</table>
+
+									<hr class="my-3">
+
+									<div class="mt-2">
+										<a class="btn btn-secondary" href="/order/list">Back</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

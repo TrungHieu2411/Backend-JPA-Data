@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}" lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>List Provider</title>
+	<!-- Liên kết CSS của Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<style>
+		/* Tùy chỉnh CSS cho giao diện */
+		.container {
+			margin-top: 50px;
+		}
+
+		.card {
+			height: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div layout:fragment="content" class="container main-content">
+		<div class="row mx-5 px-5">
+			<div class="col my-4 shadow-lg p-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Total Orders</h5>
+						<p class="card-text">
+							Total: <span th:text="${totalOrders}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col my-4 shadow-lg p-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Total Products</h5>
+						<p class="card-text">
+							Total: <span th:text="${totalProducts}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col my-4 shadow-lg p-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Total Employees</h5>
+						<p class="card-text">
+							Total: <span th:text="${totalEmployees}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col my-4 shadow-lg p-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Total Customers</h5>
+						<p class="card-text">
+							Total: <span th:text="${totalCustomers}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col my-4 shadow-lg p-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Total Providers</h5>
+						<p class="card-text">
+							Total: <span th:text="${totalProviders}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col my-4 shadow-lg p-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Total Producers</h5>
+						<p class="card-text">
+							Total: <span th:text="${totalProducers}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mx-5 px-3 mt-4 shadow-lg p-2">
+			<div class="col shadow-lg">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Cash Payment</h5>
+						<p class="card-text">
+							Total: <span th:text="${cashCount}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col shadow-lg">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Installment Payment</h5>
+						<p class="card-text">
+							Total: <span th:text="${installmentCount}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col shadow-lg">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Transfer Payment</h5>
+						<p class="card-text">
+							Total: <span th:text="${transferCount}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mx-5 px-3 mt-4 shadow-lg p-2">
+			<div class="col shadow-lg">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Shipping Order</h5>
+						<p class="card-text">
+							Total: <span th:text="${shippingStatus}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col shadow-lg">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Order Completed</h5>
+						<p class="card-text">
+							Total: <span th:text="${completedStatus}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col shadow-lg">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">New Order</h5>
+						<p class="card-text">
+							Total: <span th:text="${newOrderStatus}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col shadow-lg">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Order Cancelled</h5>
+						<p class="card-text">
+							Total: <span th:text="${orderCancelledStatus}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mx-5 px-3 mt-4 shadow-lg p-2">
+			<div class="col shadow-lg">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">VIP Customers</h5>
+						<p class="card-text">
+							Total: <span th:text="${vipCount}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col shadow-lg">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Regular Customers</h5>
+						<p class="card-text">
+							Total: <span th:text="${regularCount}"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Liên kết JavaScript của Bootstrap và jQuery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
